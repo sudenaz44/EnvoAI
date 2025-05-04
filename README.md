@@ -11,7 +11,6 @@ pip install geopandas
 pip install shapely
 pip install rasterio
 pip install osmnx
-pip install sentinelhub
 pip install geopy
 ```
 
@@ -20,7 +19,7 @@ pip install geopy
 envoai/
 ├── data/
 │ ├── fault_lines.shp
-│ ├── map.py
+│ ├── protected_area.shp
 │ ├── ... (other data API)
 ├── features/
 │ ├── elevation.py
