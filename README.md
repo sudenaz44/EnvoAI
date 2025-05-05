@@ -12,6 +12,7 @@ pip install shapely
 pip install rasterio
 pip install osmnx
 pip install geopy
+pip install scikit-learn=1.1.3
 ```
 
 ### Project Structure 
