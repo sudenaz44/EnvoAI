@@ -14,7 +14,7 @@ pip install osmnx
 pip install geopy
 ```
 
-### Project Structure
+### Project Source Data
 ```
 envoai/
 ├── data/
@@ -30,29 +30,36 @@ envoai/
 ├── main.py
 ```
 
+### Project Structure
+```
+https://resourcewatch.org/data/explore/dis016rw1-Active-Fault-Lines_1
+https://viewer.esa-worldcover.org/worldcover
+https://resourcewatch.org/data/explore/bio040-Protected-Area-Connectivity
+```
+
 ### Feature Information
-| Feature                       | Type        | Description                                                    | Used it?  | Data Source                                                               |
-| ----------------------------- | ----------- | -------------------------------------------------------------- | --------- | ------------------------------------------------------------------------- |
-| `fault_line_distance`         | Location    | Fay hattına olan uzaklık (metre cinsinden)                     | Yes       | https://resourcewatch.org/data/explore/dis016rw1-Active-Fault-Lines_1     |
-| `slope_degree`                | Location    | Arazinin eğimi (derece veya yüzde)                             | Yes       |
-| `elevation`                   | Location    | Rakım yüksekliği (metre cinsinden)                             | Yes       |                                              |
-| `soil_type`                   | Environment | Arazi tipi (tarım, çorak, orman vb.)                           | Yes       | https://viewer.esa-worldcover.org/worldcover |
-| `land_use`                    | Location    | Arazi kullanımı (konut, sanayi, tarım...)                      | `No`      |
-| `green_area_coverage`         | Environment | Belirli bir yarıçap içinde yeşil alan oranı (%)                | Yes       |
-| `water_proximity`             | Environment | En yakın su kaynağına uzaklık                                  | Yes       |
-| `climate_zone`                | Environment | Bulunduğu iklim sınıflandırması (Köppen gibi)                  | `No`      |
-| `seasonal_accessibility`      | Location    | Yıl boyunca ulaşılabilirlik durumu                             | `No`      |
-| `disaster_risk_index`         | Environment | Genel afet riski skoru (deprem, sel, yangın vs.)               | Yes       |
-| `biodiversity_index`          | Environment | Biyoçeşitlilik yoğunluğu ve nadir türlerin varlığı             | Yes       |
-| `protected_area_proximity`    | Environment | Sit alanı, milli park gibi koruma alanlarına yakınlık          | Yes       | https://resourcewatch.org/data/explore/bio040-Protected-Area-Connectivity |
-| `air_quality_index`           | Environment | PM2.5/PM10 gibi hava kalitesi ölçümleri                        | Yes       |
-| `noise_pollution_potential`   | Environment | Gürültü kaynağına (trafik, sanayi) yakınlık                    | Yes       |
-| `groundwater_pollution_risk`  | Environment | Yeraltı suyu kirliliği riski (tarım/sanayi etkisi)             | `No`      |
-| `transport_accessibility`     | Human       | Toplu taşıma, yol, otoyol gibi ağlara erişim kolaylığı         | Yes       |
-| `infrastructure_availability` | Human       | Su, elektrik, kanalizasyon gibi altyapı durumu                 | Yes       |
-| `zoning_compliance`           | Human       | Mevcut imar planlarına uyumluluk (binary)                      | Yes       |
-| `poi_density`                 | Human       | Yakın çevredeki market, okul, eczane gibi noktaların yoğunluğu | Yes       |
-| `socioeconomic_score`         | Human       | Bölgenin gelir değeri                                          | Yes       |
+| Feature                       | Description                                                    | Paramaters                               |
+| ----------------------------- | -------------------------------------------------------------- | ---------------------------------------- |
+| `fault_line_distance`         | Fay hattına olan uzaklık (metre cinsinden)                     | point: list(lon, lat)                    | 
+| `slope_degree`                | Arazinin eğimi (derece veya yüzde)                             | point: list(lon, lat)                    |
+| `elevation`                   | Rakım yüksekliği (metre cinsinden)                             | point: list(lon, lat)                    |  
+| `soil_type`                   | Arazi tipi (tarım, çorak, orman vb.)                           | point: list(lon, lat)                    |  
+| `land_use`                    | Arazi kullanımı (konut, sanayi, tarım...)                      | point: list(lon, lat) , radius: int      |
+| `green_area_coverage`         | Belirli bir yarıçap içinde yeşil alan oranı (%)                | point: list(lon, lat) , radius: int      |
+| `water_proximity`             | En yakın su kaynağına uzaklık                                  | point: list(lon, lat) , radius: int      |
+| `climate_zone`                | Bulunduğu iklim sınıflandırması (Köppen gibi)                  | `No`                                     |
+| `seasonal_accessibility`      | Yıl boyunca ulaşılabilirlik durumu                             | `No`                                     |
+| `disaster_risk_index`         | Genel afet riski skoru (deprem, sel, yangın vs.)               | point: list(lon, lat)                    |
+| `biodiversity_index`          | Biyoçeşitlilik yoğunluğu ve nadir türlerin varlığı             | point: list(lon, lat)                    |
+| `protected_area_proximity`    | Sit alanı, milli park gibi koruma alanlarına yakınlık          | point: list(lon, lat)                    |  
+| `air_quality_index`           | PM2.5/PM10 gibi hava kalitesi ölçümleri                        | point: list(lon, lat)                    |
+| `noise_pollution_potential`   | Gürültü kaynağına (trafik, sanayi) yakınlık                    | point: list(lon, lat) , radius: int      |
+| `groundwater_pollution_risk`  | Yeraltı suyu kirliliği riski (tarım/sanayi etkisi)             | `No`                                     |
+| `transport_accessibility`     | Toplu taşıma, yol, otoyol gibi ağlara erişim kolaylığı         | point: list(lon, lat) , radius: int      |
+| `infrastructure_availability` | Su, elektrik, kanalizasyon gibi altyapı durumu                 | point: list(lon, lat) , radius: int      |
+| `zoning_compliance`           | Mevcut imar planlarına uyumluluk (binary)                      | point: list(lon, lat) , radius: int      |
+| `poi_density`                 | Yakın çevredeki market, okul, eczane gibi noktaların yoğunluğu | point: list(lon, lat) , radius: int      |
+| `socioeconomic_score`         | Bölgenin gelir değeri                                          | point: list(lon, lat)                    |
 
 
 
