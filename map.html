@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Harita</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        html, body, #map {
+            height: 100%;
+            margin: 0;
+        }
+    </style>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+</head>
+<body>
+    <div id="map"></div>
+
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+    <script>
+        var map = L.map('map').setView([39.92077, 32.85411], 10); // Ankara default
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            maxZoom: 18
+        }).addTo(map);
+
+        function setLocation(lat, lon) {
+            map.setView([lat, lon], 14);
+            L.marker([lat, lon]).addTo(map)
+                .bindPopup('Seçilen Konum')
+                .openPopup();
+        }
+    </script>
+</body>
+</html>
