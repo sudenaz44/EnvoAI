@@ -38,30 +38,28 @@ https://resourcewatch.org/data/explore/bio040-Protected-Area-Connectivity
 ```
 
 ### Feature Information
-| Feature                       | Description                                                    | Paramaters                                 |
-| ----------------------------- | -------------------------------------------------------------- | ------------------------------------------ |
-| `fault_line_distance`         | Fay hattına olan uzaklık (metre cinsinden)                     | `point: list(lon, lat)`                    | 
-| `slope_degree`                | Arazinin eğimi (derece veya yüzde)                             | `point: list(lon, lat)`                    |
-| `elevation`                   | Rakım yüksekliği (metre cinsinden)                             | `point: list(lon, lat)`                    |  
-| `soil_type`                   | Arazi tipi (tarım, çorak, orman vb.)                           | `point: list(lon, lat)`                    |  
-| `land_use`                    | Arazi kullanımı (konut, sanayi, tarım...)                      | `point: list(lon, lat) , radius: int`      |
-| `green_area_coverage`         | Belirli bir yarıçap içinde yeşil alan oranı (%)                | `point: list(lon, lat) , radius: int`      |
-| `water_proximity`             | En yakın su kaynağına uzaklık                                  | `point: list(lon, lat) , radius: int`      |
-| `climate_zone`                | Bulunduğu iklim sınıflandırması (Köppen gibi)                  | `No`                                       |
-| `seasonal_accessibility`      | Yıl boyunca ulaşılabilirlik durumu                             | `No`                                       |
-| `disaster_risk_index`         | Genel afet riski skoru (deprem, sel, yangın vs.)               | `point: list(lon, lat)`                    |
-| `biodiversity_index`          | Biyoçeşitlilik yoğunluğu ve nadir türlerin varlığı             | `point: list(lon, lat)`                    |
-| `protected_area_proximity`    | Sit alanı, milli park gibi koruma alanlarına yakınlık          | `point: list(lon, lat)`                    |  
-| `air_quality_index`           | PM2.5/PM10 gibi hava kalitesi ölçümleri                        | `point: list(lon, lat)`                    |
-| `noise_pollution_potential`   | Gürültü kaynağına (trafik, sanayi) yakınlık                    | `point: list(lon, lat) , radius: int`      |
-| `groundwater_pollution_risk`  | Yeraltı suyu kirliliği riski (tarım/sanayi etkisi)             | `No`                                       |
-| `transport_accessibility`     | Toplu taşıma, yol, otoyol gibi ağlara erişim kolaylığı         | `point: list(lon, lat) , radius: int`      |
-| `infrastructure_availability` | Su, elektrik, kanalizasyon gibi altyapı durumu                 | `point: list(lon, lat) , radius: int`      |
-| `zoning_compliance`           | Mevcut imar planlarına uyumluluk (binary)                      | `point: list(lon, lat) , radius: int`      |
-| `poi_density`                 | Yakın çevredeki market, okul, eczane gibi noktaların yoğunluğu | `point: list(lon, lat) , radius: int`      |
-| `socioeconomic_score`         | Bölgenin gelir değeri                                          | `point: list(lon, lat)`                    |
-
-
+| Feature                       | Description                          | Kütüphaneler                       | Fonksiyon Parametreleri                | Çıktı Değeri                     | Değer Tipi |
+| ----------------------------- | ------------------------------------ | ---------------------------------- | -------------------------------------- | -------------------------------- | ---------- |
+| `fault_line_distance`         | Fay hattına olan uzaklık (metre)     | `geopandas`, `shapely`             | `point: list[lon, lat]`                | float (metre)                    | Sayısal    |
+| `slope_degree`                | Arazinin eğimi (derece)              | `rasterio`, `numpy`                | `point: list[lon, lat]`                | float (derece)                   | Sayısal    |
+| `elevation`                   | Rakım yüksekliği (metre)             | `elevation`, `SRTM`, `rasterio`    | `point: list[lon, lat]`                | float (metre)                    | Sayısal    |
+| `soil_type`                   | Arazi tipi (tarım, çorak vb.)        | `geopandas`                        | `point: list[lon, lat]`                | string                           | Kategorik  |
+| `land_use`                    | Arazi kullanımı (konut, tarım vs.)   | `geopandas`, `osmnx`               | `point: list[lon, lat]`, `radius: int` | string                           | Kategorik  |
+| `green_area_coverage`         | Belirli yarıçapta yeşil alan yüzdesi | `geopandas`, `osmnx`               | `point: list[lon, lat]`, `radius: int` | float (%)                        | Sayısal    |
+| `water_proximity`             | Su kaynağına uzaklık                 | `geopandas`, `osmnx`               | `point: list[lon, lat]`, `radius: int` | float (metre)                    | Sayısal    |
+| `climate_zone`                | İklim sınıfı (Köppen-Geiger)         | `geopandas`, `rasterio`            | Yok                                    | string                           | Kategorik  |
+| `seasonal_accessibility`      | Tüm yıl boyunca erişilebilirlik      | `geopandas`                        | Yok                                    | string / boolean                 | Kategorik  |
+| `disaster_risk_index`         | Afet riski skoru (deprem, sel...)    | `geopandas`, `custom_risk_data`    | `point: list[lon, lat]`                | float (0-1 arası skor)           | Sayısal    |
+| `biodiversity_index`          | Biyoçeşitlilik skoru                 | `geopandas`, `biodiversity_data`   | `point: list[lon, lat]`                | float                            | Sayısal    |
+| `protected_area_proximity`    | Koruma alanına uzaklık               | `geopandas`, `shapely`             | `point: list[lon, lat]`                | float (metre)                    | Sayısal    |
+| `air_quality_index`           | Hava kalitesi (PM2.5, PM10)          | `openaq`, `requests`, `geopandas`  | `point: list[lon, lat]`                | float (AQI skoru)                | Sayısal    |
+| `noise_pollution_potential`   | Gürültü kaynağına yakınlık           | `geopandas`, `osmnx`               | `point: list[lon, lat]`, `radius: int` | float (metre)                    | Sayısal    |
+| `groundwater_pollution_risk`  | Yeraltı suyu kirliliği riski         | `geopandas`, `environmental_data`  | Yok                                    | float / string (low/medium/high) | Kategorik  |
+| `transport_accessibility`     | Ulaşım altyapısına yakınlık          | `osmnx`, `networkx`                | `point: list[lon, lat]`, `radius: int` | float (mesafe veya erişim skoru) | Sayısal    |
+| `infrastructure_availability` | Altyapı varlığı                      | `geopandas`, `infrastructure_data` | `point: list[lon, lat]`, `radius: int` | boolean / string                 | Kategorik  |
+| `zoning_compliance`           | İmar planına uyum                    | `geopandas`, `zoning_data`         | `point: list[lon, lat]`, `radius: int` | boolean                          | Kategorik  |
+| `poi_density`                 | Market, okul vb. POI yoğunluğu       | `osmnx`, `geopandas`               | `point: list[lon, lat]`, `radius: int` | int / float                      | Sayısal    |
+| `socioeconomic_score`         | Gelir düzeyi ve sosyal seviye        | `geopandas`, `socioeconomic_data`  | `point: list[lon, lat]`                | float (skor)                     | Sayısal    |
 
 
 
