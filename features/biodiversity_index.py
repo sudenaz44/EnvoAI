@@ -16,6 +16,6 @@ def get_biodiversity_index(point):
             return len(species)
         else:
             return 0
-    except Exception as e:
-        return f"Error fetching biodiversity data: {e}"
+    except:
+        return 0
 

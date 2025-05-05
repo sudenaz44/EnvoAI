@@ -25,8 +25,8 @@ def get_disaster_risk_index(point):
             return risk_score
         else:
             return 0
-    except Exception as e:
-        return f"Error fetching disaster data: {e}"
+    except:
+        return 0
 
 
 def calculate_distance(lon1, lat1, lon2, lat2):

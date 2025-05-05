@@ -1,5 +1,6 @@
 import geopandas as gpd
 from pyproj import Geod
+from shapely.geometry import Point
 
 geod = Geod(ellps="WGS84")
 
@@ -15,29 +16,32 @@ def get_fault_line_distance(point, fault_shapefile="data/faultLine/gem_active_fa
     Returns:
         float: Minimum distance in meters.
     """
-    # Create shapely point
+    try:
+        point = Point(point)
 
-    # Read fault lines from shapefile
-    fault_lines = gpd.read_file(fault_shapefile)
+        # Read fault lines from shapefile
+        fault_lines = gpd.read_file(fault_shapefile)
 
-    # Initialize minimum distance
-    min_distance = float('inf')
+        # Initialize minimum distance
+        min_distance = float('inf')
 
-    for _, row in fault_lines.iterrows():
-        geom = row.geometry
+        for _, row in fault_lines.iterrows():
+            geom = row.geometry
 
-        # Skip non-line geometries and empty ones
-        if geom.is_empty or not geom.geom_type.startswith("Line"):
-            continue
+            # Skip non-line geometries and empty ones
+            if geom.is_empty or not geom.geom_type.startswith("Line"):
+                continue
 
-        # Project the point onto the line
-        projected_point = geom.interpolate(geom.project(point))
-        
-        # Compute geodesic (WGS84) distance
-        _, _, distance = geod.inv(point.x, point.y, projected_point.x, projected_point.y)
+            # Project the point onto the line
+            projected_point = geom.interpolate(geom.project(point))
+            
+            # Compute geodesic (WGS84) distance
+            _, _, distance = geod.inv(point.x, point.y, projected_point.x, projected_point.y)
 
-        # Update minimum distance
-        if distance < min_distance:
-            min_distance = distance
+            # Update minimum distance
+            if distance < min_distance:
+                min_distance = distance
 
-    return min_distance
+        return min_distance
+    except:
+        return 0

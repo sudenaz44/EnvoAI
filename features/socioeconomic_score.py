@@ -18,7 +18,7 @@ def get_socioeconomic_score(point):
             return gdp_per_capita
         else:
             return 0
-    except Exception as e:
+    except:
         return 0
 
 
@@ -35,6 +35,6 @@ def get_country_code(lat, lon):
             return country_code
         else:
             return 0
-    except Exception as e:
-        return f"Error fetching country code: {e}"
+    except:
+        return 0
 

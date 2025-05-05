@@ -11,8 +11,11 @@ def get_elevation(point):
     url = f"https://api.open-elevation.com/api/v1/lookup?locations={lat},{lon}"
     response = requests.get(url)
 
-    if response.status_code == 200:
-        elevation = response.json()["results"][0]["elevation"]
-        return elevation
-    else:
-        return None
+    try: 
+        if response.status_code == 200:
+            elevation = response.json()["results"][0]["elevation"]
+            return elevation
+        else:
+            return 0
+    except:
+        return 0

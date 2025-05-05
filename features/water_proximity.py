@@ -18,29 +18,28 @@ def get_water_proximity(point, radius=1000):
     
     try:
         water_bodies = ox.features_from_point(center_point=(lat, lon), tags=tags, dist=radius)
-    except Exception as e:
-        print(f"[!] Error fetching water data: {e}")
+
+        if water_bodies.empty:
+            return 0  # No water body found within the radius
+
+        min_distance = float("inf")
+
+        for _, feature in water_bodies.iterrows():
+            geometry = feature.geometry
+
+            if geometry.is_empty:
+                continue
+
+            if geometry.geom_type == "Point":
+                coords = (geometry.y, geometry.x)
+            else:
+                # Get nearest coordinate from complex geometries (like LineString or Polygon)
+                coords = (geometry.centroid.y, geometry.centroid.x)
+
+            distance = geodesic((lat, lon), coords).meters
+            if distance < min_distance:
+                min_distance = distance
+
+        return min_distance
+    except:
         return 0
-
-    if water_bodies.empty:
-        return 0  # No water body found within the radius
-
-    min_distance = float("inf")
-
-    for _, feature in water_bodies.iterrows():
-        geometry = feature.geometry
-
-        if geometry.is_empty:
-            continue
-
-        if geometry.geom_type == "Point":
-            coords = (geometry.y, geometry.x)
-        else:
-            # Get nearest coordinate from complex geometries (like LineString or Polygon)
-            coords = (geometry.centroid.y, geometry.centroid.x)
-
-        distance = geodesic((lat, lon), coords).meters
-        if distance < min_distance:
-            min_distance = distance
-
-    return min_distance

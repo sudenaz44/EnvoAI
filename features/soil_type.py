@@ -21,12 +21,11 @@ def get_soil_type(point):
         clay_content = data['properties']['layers'][0]['depths'][0]['values'].get('mean')
 
         if clay_content is None:
-            return "unknown"
+            return "sandy"
 
         return classify_soil_by_clay(clay_content)
-    except Exception as e:
-        print(f"[!] Error fetching soil data: {e}")
-        return "unknown"
+    except:
+        return "sandy"
 
 def classify_soil_by_clay(clay_pct):
     """

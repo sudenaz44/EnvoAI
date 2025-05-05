@@ -17,7 +17,7 @@ def get_land_use(point, radius=1000):
         gdf = ox.features_from_bbox(bbox=bbox, tags=tags)
 
         if gdf.empty:
-            return "unknown"
+            return 0
 
         for key in ["landuse", "natural"]:
             if key in gdf.columns:
@@ -25,8 +25,7 @@ def get_land_use(point, radius=1000):
                 if len(vals) > 0:
                     return vals[0]
 
-        return "unknown"
+        return 0
 
-    except Exception as e:
-        print(f"[!] Error in land use extraction: {e}")
-        return "unknown"
+    except:
+        return 0
