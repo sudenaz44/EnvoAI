@@ -14,7 +14,7 @@ pip install osmnx
 pip install geopy
 ```
 
-### Project Source Data
+### Project Structure 
 ```
 envoai/
 ├── data/
@@ -30,7 +30,7 @@ envoai/
 ├── main.py
 ```
 
-### Project Structure
+### Project Source Data
 ```
 https://resourcewatch.org/data/explore/dis016rw1-Active-Fault-Lines_1
 https://viewer.esa-worldcover.org/worldcover
