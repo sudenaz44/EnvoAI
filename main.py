@@ -55,33 +55,27 @@ def get_project_radius(data):
 # All Features
 # --------------------------------------------
 
-def extract_all_features(project_data):
-    loc_point = get_project_location_point(project_data)
-    radius = get_project_radius(project_data)
-
-    features = {
-        "fault_line_distance": get_fault_line_distance(Point(loc_point)),
-        "soil_type": get_soil_type(loc_point),
-        # "land_use": get_land_use(loc_point, radius),
-        "water_proximity": get_water_proximity(loc_point, radius),
-        "green_area_coverage": get_green_area_coverage(loc_point, radius),
-        "elevation": get_elevation(loc_point),
-        "slope_degree": get_slope_degree(loc_point),
-        "poi_density": get_poi_density(loc_point, radius),
-        "air_quality_index": get_air_quality_index(loc_point),
-        "transport_accessibility": get_transport_accessibility(loc_point, radius),
-        "infrastructure_availability": get_infrastructure_availability(loc_point, radius),
-        "protected_area_proximity": get_protected_area_proximity(Point(loc_point)),
-        "zoning_compliance": get_zoning_compliance(loc_point, radius),
-        "disaster_risk_index": get_disaster_risk_index(loc_point),
-        "biodiversity_index": get_biodiversity_index(loc_point),
-        "noise_pollution_potential": get_noise_pollution_potential(loc_point, radius),
-        "socioeconomic_score": get_socioeconomic_score(loc_point),
+def extract_all_features(point, radius):
+    return {
+        "fault_line_distance": get_fault_line_distance(point),
+        "green_area_coverage": get_green_area_coverage(point, radius),
+        "elevation": get_elevation(point),
+        "slope_degree": get_slope_degree(point),
+        "poi_density": get_poi_density(point, radius),
+        "air_quality_index": get_air_quality_index(point),
+        "transport_accessibility": get_transport_accessibility(point, radius),
+        "infrastructure_availability": get_infrastructure_availability(point, radius),
+        "protected_area_proximity": get_protected_area_proximity(point),
+        "zoning_compliance": get_zoning_compliance(point, radius),
+        "biodiversity_index": get_biodiversity_index(point),
+        "disaster_risk_index": get_disaster_risk_index(point),
+        # "land_use": get_land_use(point, radius),
+        "noise_pollution_potential": get_noise_pollution_potential(point, radius),
+        "socioeconomic_score": get_socioeconomic_score(point),
+        "soil_type": get_soil_type(point),
+        "water_proximity": get_water_proximity(point, radius)
         # other feature..
     }
-
-    return features
-
 
 
 # --------------------------------------------
@@ -89,8 +83,8 @@ def extract_all_features(project_data):
 # --------------------------------------------
 
 def main():
-    project_data = get_project_input()
-    feature_values = extract_all_features(project_data)
+    data = get_project_input()
+    feature_values = extract_all_features(point=[data["longitude"], data["latitude"]], radius=data["radius"])
 
     print("[+] Project Location: ({}, {})".format(project_data["latitude"], project_data["longitude"]))
     print("[+] Feature Value:")
