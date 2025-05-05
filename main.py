@@ -3,6 +3,8 @@
 """
 
 from shapely.geometry import Point
+import pandas as pd
+from .model import predict_suitability
 
 
 # --------------------------------------------
@@ -34,29 +36,15 @@ from features.socioeconomic_score import get_socioeconomic_score
 # Example input
 # --------------------------------------------
 
-def get_project_input():
-    return {
-        "latitude": 41.0164,
-        "longitude": 28.9550,
-        "radius": 1000,
-    }
-
-# --------------------------------------------
-# Create Location
-# --------------------------------------------
-def get_project_location_point(data):
-    return [data["longitude"], data["latitude"]]
-
-def get_project_radius(data):
-    return data["radius"]
-
+def get_project_input(lat=41.0164, lon=28.9550, radius=1000):
+    return lat, lon, radius
 
 # --------------------------------------------
 # All Features
 # --------------------------------------------
 
 def extract_all_features(point, radius):
-    return {
+    return pd.DataFrame([{
         "fault_line_distance": get_fault_line_distance(point),
         "green_area_coverage": get_green_area_coverage(point, radius),
         "elevation": get_elevation(point),
@@ -75,7 +63,7 @@ def extract_all_features(point, radius):
         "soil_type": get_soil_type(point),
         "water_proximity": get_water_proximity(point, radius)
         # other feature..
-    }
+    }])
 
 
 # --------------------------------------------
@@ -83,13 +71,19 @@ def extract_all_features(point, radius):
 # --------------------------------------------
 
 def main():
-    data = get_project_input()
-    feature_values = extract_all_features(point=[data["longitude"], data["latitude"]], radius=data["radius"])
+    lat, lon, radius = get_project_input(lat=41, lon=28, radius=1000)
+    feature_values = extract_all_features(point=[lon, lat], radius=radius)
 
-    print("[+] Project Location: ({}, {})".format(project_data["latitude"], project_data["longitude"]))
+    """
+    print("[+] Project Location: ({}, {})".format(lat, lon))
     print("[+] Feature Value:")
     for feature, value in feature_values.items():
         print(f"    - {feature}: {value}")
+    """
+    score = predict_suitability(feature_values.iloc[0].to_dict())
+
+    print("[+] Project Location: ({}, {})".format(lat, lon))
+    print("[+] Feature Score: ({})".format(score))
 
 if __name__ == "__main__":
     main()
