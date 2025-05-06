@@ -1,5 +1,10 @@
 # EnvoAI
 
+<img src="https://github.com/user-attachments/assets/ab2917ef-03e0-40b4-a74e-0bfb3237709d" style="width:20%;"></img>
+<img src="https://github.com/user-attachments/assets/029ee331-3666-4659-af6f-5fcab7433d6e" style="width:20%;"></img>
+<img src="https://github.com/user-attachments/assets/c3a7df4d-c12b-41bf-b98c-f24640429ba9" style="width:20%;"></img>
+
+
 ### Project Objective
 An artificial intelligence-supported sustainability project that analyzes the potential impacts of public/private sector projects on nature according to location, sector, scale and environmental parameters.
 
