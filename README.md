@@ -70,3 +70,12 @@ https://resourcewatch.org/data/explore/bio040-Protected-Area-Connectivity
 
 
 
+#UI SS
+
+![WhatsApp Görsel 2025-05-06 saat 17 44 06_eb0b8b84](https://github.com/user-attachments/assets/f86dfe13-534f-4636-b157-c3368de8b47d)
+
+![WhatsApp Görsel 2025-05-06 saat 17 44 24_a9b234ca](https://github.com/user-attachments/assets/7a0d7f7b-8328-4ffc-baee-91f8ab3c754f)
+
+![WhatsApp Görsel 2025-05-06 saat 17 46 04_ffc9ff4b](https://github.com/user-attachments/assets/223dc482-d6ab-4904-b583-211a7cbd05a5)
+
+![WhatsApp Görsel 2025-05-06 saat 17 46 04_ffc9ff4b](https://github.com/user-attachments/assets/3f40fb11-4ad5-4022-8bd9-ecac8253acee)
